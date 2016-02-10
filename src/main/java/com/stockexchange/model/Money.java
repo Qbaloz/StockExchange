@@ -9,9 +9,11 @@ public class Money {
 		this.currency = currency;
 		this.amount = amount;
 	}
+	
 	public String getCurrency() {
 		return currency;
 	}
+	
 	public void setCurrency(String currency) {
 		this.currency = currency;
 		

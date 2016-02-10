@@ -3,9 +3,9 @@ package com.stockexchange.model;
 public class Stock {
 	
 	private String companyName;
-	private String stockValue;
+	private double stockValue;
 	
-	public Stock(String companyName, String stockValue) {
+	public Stock(String companyName, double stockValue) {
 		this.companyName = companyName;
 		this.stockValue = stockValue;
 	}
@@ -18,11 +18,11 @@ public class Stock {
 		this.companyName = companyName;
 	}
 
-	public String getStockValue() {
+	public double getStockValue() {
 		return stockValue;
 	}
 
-	public void setStockValue(String stockValue) {
+	public void setStockValue(double stockValue) {
 		this.stockValue = stockValue;
 	}
 	

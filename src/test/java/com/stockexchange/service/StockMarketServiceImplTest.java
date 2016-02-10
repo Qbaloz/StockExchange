@@ -32,18 +32,18 @@ public class StockMarketServiceImplTest {
 	public void shouldReturnStocksListFromSelectedDay() throws ParseException {
 		// given
 		List<Stock> stocks = new ArrayList<Stock>();
-		stocks.add(new Stock("PKOBP","34.6"));
-		stocks.add(new Stock("KGHM","121.9"));
-		stocks.add(new Stock("PGNIG","5.82"));
-		stocks.add(new Stock("JSW","69.9"));
-		stocks.add(new Stock("TPSA","7.73"));
+		stocks.add(new Stock("PKOBP",34.6));
+		stocks.add(new Stock("KGHM",121.9));
+		stocks.add(new Stock("PGNIG",5.82));
+		stocks.add(new Stock("JSW",69.9));
+		stocks.add(new Stock("TPSA",7.73));
 		// when
 		date = format.parse("20130624");
 		List<Stock> stocksFromRepository = stockMarketService.getStocksFromDay(date);
 		// then
 		assertNotNull(stocksFromRepository);
         assertEquals(stocks.get(3).getCompanyName(), stocksFromRepository.get(3).getCompanyName());
-        assertEquals(stocks.get(3).getStockValue(), stocksFromRepository.get(3).getStockValue());
+        assertEquals(stocks.get(3).getStockValue(), stocksFromRepository.get(3).getStockValue(),0);
 	}
 
 }

@@ -18,5 +18,4 @@ public class BrokersOffice {
 	public List<Stock> getStocks(Date date){
 		return stockMarketService.getStocksFromDay(date);
 	}
-	
 }

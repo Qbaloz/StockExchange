@@ -41,6 +41,8 @@ public class StockMarketDataRepositoryImpl implements StockMarketDataRepository{
 			while ((line = br.readLine()) != null) {
 				String[] data = line.split(cvsSplitBy);
 				
+				double value = Double.parseDouble(data[2]);
+				
 				try {
 					date = format.parse(data[1]);
 				} catch (ParseException e) {
@@ -52,12 +54,12 @@ public class StockMarketDataRepositoryImpl implements StockMarketDataRepository{
 				if (null == stockList)
 				{
 					stockList = new ArrayList<Stock>();
-					stockList.add(new Stock(data[0], data[2]));
+					stockList.add(new Stock(data[0], value));
 					stockMap.put(date, stockList);
 				}
 				else
 				{
-					stockList.add(new Stock(data[0], data[2]));
+					stockList.add(new Stock(data[0], value));
 				}
 			}
 			
