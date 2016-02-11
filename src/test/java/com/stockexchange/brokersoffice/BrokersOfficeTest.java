@@ -19,8 +19,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.stockexchange.StockexchangeApplication;
-import com.stockexchange.account.Account;
 import com.stockexchange.model.Stock;
+import com.stockexchange.model.StockTo;
 import com.stockexchange.service.StockMarketService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +31,7 @@ public class BrokersOfficeTest {
 	private StockMarketService stockMarketService;
 	
 	@Autowired
-	private Account account;
+	private BrokersOffice brokersOffice;
 
 	Date date = new Date();
 	DateFormat format = new SimpleDateFormat("yyyymmdd", Locale.ENGLISH);
@@ -55,19 +55,67 @@ public class BrokersOfficeTest {
 	}
 	
 	@Test
-	public void testShouldCheckAccountBalanceInPolskiZloty() {
+	public void testShouldCheckAccountBalanceInPLN() {
 		// given
 		Map<String, Double> expectedBalance = new HashMap<String, Double>();
-		expectedBalance.put("Polski Zloty", (double) 10000);
-		expectedBalance.put("Euro", (double) 0);
+		expectedBalance.put("PLN", (double) 10000);
+		expectedBalance.put("EUR", (double) 0);
 		double expectedAmount = 10000;
 		// when
-		Map<String, Double> balance = account.getBalance();
-		double amount = balance.get("Polski Zloty");
+		Map<String, Double> balance = brokersOffice.checkUserBalance();
+		double amount = balance.get("PLN");
 		// then
 		assertNotNull(balance);
-		assertEquals(expectedBalance.get("Polski Zloty"), balance.get("Polski Zloty"));
+		assertEquals(expectedBalance.get("PLN"), balance.get("PLN"));
 		assertEquals(amount, expectedAmount, 0);
+	}
+	
+	@Test
+	public void testShouldCheckAccountBalanceInEUR() {
+		// given
+		Map<String, Double> expectedBalance = new HashMap<String, Double>();
+		expectedBalance.put("PLN", (double) 10000);
+		expectedBalance.put("EUR", (double) 0);
+		double expectedAmount = 0;
+		// when
+		Map<String, Double> balance = brokersOffice.checkUserBalance();
+		double amount = balance.get("EUR");
+		// then
+		assertNotNull(balance);
+		assertEquals(expectedBalance.get("EUR"), balance.get("EUR"));
+		assertEquals(amount, expectedAmount, 0);
+	}
+	
+	@Test
+	public void testShouldBuyStocksUsingPLNCurrency(){
+		// given
+		StockTo stockTo = new StockTo(new Stock("PKOBP",10),50);
+		double expectedBalance = 9500;
+		double expectedStocksAmount = 50;
+		String currencyToUse = "PLN";
+		// when
+		brokersOffice.buyStocks(currencyToUse, stockTo);
+		Map<String, Double> userBalance = brokersOffice.checkUserBalance();
+		Map<String, Double> userStocks = brokersOffice.checkUserStocks();
+		//then
+		assertEquals(expectedBalance,userBalance.get(currencyToUse), 0);
+		assertEquals(expectedStocksAmount,userStocks.get("PKOBP"), 0);
+	}
+	
+	@Test
+	public void testShouldSellStocksUsingPLNCurrency(){
+		// given
+		StockTo stockTo = new StockTo(new Stock("PKOBP",10),50);
+		double expectedBalance = 10000;
+		double expectedStocksAmount = 0;
+		String currencyToUse = "PLN";
+		// when
+		brokersOffice.sellStocks(currencyToUse, stockTo);
+		Map<String, Double> userBalance = brokersOffice.checkUserBalance();
+		Map<String, Double> userStocks = brokersOffice.checkUserStocks();
+		//then
+		assertEquals(expectedBalance,userBalance.get(currencyToUse), 0);
+		assertEquals(expectedStocksAmount,userStocks.get("PKOBP"), 0);
 	}
 
 }

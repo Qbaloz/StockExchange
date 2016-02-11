@@ -31,88 +31,88 @@ public class AccountTest {
 	}
 	
 	@Test
-	public void testShouldDepositMoneyInPolskiZloty(){
+	public void testShouldDepositMoneyInPLN(){
 		//given
 		account = new Account(10000,0);
-		Money money = new Money("Polski Zloty", 5000);
+		Money money = new Money("PLN", 5000);
 		double expectedBalance = 15000;
 		//when
 		account.depositMoney(money);
 		Map<String, Double> balance = account.getBalance();
 		//then
-		assertEquals(expectedBalance, balance.get("Polski Zloty"), 0);
+		assertEquals(expectedBalance, balance.get("PLN"), 0);
 	}
 	
 	@Test
-	public void testShouldDepositMoneyInEuro(){
+	public void testShouldDepositMoneyInEUR(){
 		//given
 		account = new Account(10000,0);
-		Money money = new Money("Euro", 5000);
+		Money money = new Money("EUR", 5000);
 		double expectedBalance = 5000;
 		//when
 		account.depositMoney(money);
 		Map<String, Double> balance = account.getBalance();
 		//then
-		assertEquals(expectedBalance, balance.get("Euro"), 0);
+		assertEquals(expectedBalance, balance.get("EUR"), 0);
 	}
 	
 	@Test
-	public void testShouldWithdrawMoneyInPolskiZloty(){
+	public void testShouldWithdrawMoneyInPLN(){
 		//given
 		account = new Account(10000,0);
-		Money money = new Money("Polski Zloty", 5000);
+		Money money = new Money("PLN", 5000);
 		double expectedBalance = 5000;
 		//when
 		account.withdrawMoney(money);
 		Map<String, Double> balance = account.getBalance();
 		//then
-		assertEquals(expectedBalance, balance.get("Polski Zloty"), 0);
+		assertEquals(expectedBalance, balance.get("PLN"), 0);
 	}
 	
 	@Test
-	public void testShouldWithdrawMoneyInEuro(){
+	public void testShouldWithdrawMoneyInEUR(){
 		//given
 		account = new Account(10000,5000);
-		Money money = new Money("Euro", 5000);
+		Money money = new Money("EUR", 5000);
 		double expectedBalance = 0;
 		//when
 		account.withdrawMoney(money);
 		Map<String, Double> balance = account.getBalance();
 		//then
-		assertEquals(expectedBalance, balance.get("Euro"), 0);
+		assertEquals(expectedBalance, balance.get("EUR"), 0);
 	}
 
 	@Test
-	public void testShouldCheckAccountBalanceInPolskiZloty() {
+	public void testShouldCheckAccountBalanceInPLN() {
 		// given
 		account = new Account(10000,5000);
 		Map<String, Double> expectedBalance = new HashMap<String, Double>();
-		expectedBalance.put("Polski Zloty", (double) 10000);
-		expectedBalance.put("Euro", (double) 0);
+		expectedBalance.put("PLN", (double) 10000);
+		expectedBalance.put("EUR", (double) 0);
 		double expectedAmount = 10000;
 		// when
 		Map<String, Double> balance = account.getBalance();
-		double amount = balance.get("Polski Zloty");
+		double amount = balance.get("PLN");
 		// then
 		assertNotNull(balance);
-		assertEquals(expectedBalance.get("Polski Zloty"), balance.get("Polski Zloty"));
+		assertEquals(expectedBalance.get("PLN"), balance.get("PLN"));
 		assertEquals(amount, expectedAmount, 0);
 	}
 	
 	@Test
-	public void testShouldCheckAccountBalanceInEuro() {
+	public void testShouldCheckAccountBalanceInEUR() {
 		// given
 		account = new Account(10000,5000);
 		Map<String, Double> expectedBalance = new HashMap<String, Double>();
-		expectedBalance.put("Polski Zloty", (double) 10000);
-		expectedBalance.put("Euro", (double) 5000);
+		expectedBalance.put("PLN", (double) 10000);
+		expectedBalance.put("EUR", (double) 5000);
 		double expectedAmount = 5000;
 		// when
 		Map<String, Double> balance = account.getBalance();
-		double amount = balance.get("Euro");
+		double amount = balance.get("EUR");
 		// then
 		assertNotNull(balance);
-		assertEquals(expectedBalance.get("Euro"), balance.get("Euro"));
+		assertEquals(expectedBalance.get("EUR"), balance.get("EUR"));
 		assertEquals(amount, expectedAmount, 0);
 	}
 	
@@ -125,9 +125,9 @@ public class AccountTest {
 		account = new Account(10000,5000);
 		// when
 		for(int i = 0; i < expectedStockList.size(); i++){
-			account.addStocks(expectedStockList.get(i), expectedStockList.get(i).getAmount());
+			account.addStocks(expectedStockList.get(i));
 		}
-		Map<String, Double> stocks = account.getStockList();
+		Map<String, Double> stocks = account.getStocks();
 		// then
 		assertEquals(expectedStockList.get(0).getAmount(), stocks.get("KGHM").doubleValue(),0);
 		assertEquals(expectedStockList.get(1).getAmount(), stocks.get("PKOBP").doubleValue(),0);
@@ -141,13 +141,13 @@ public class AccountTest {
 		expectedStockList.add(new StockTo(new Stock("PKOBP",20), 20));
 		account = new Account(10000,5000);
 		for(int i = 0; i < expectedStockList.size(); i++){
-			account.addStocks(expectedStockList.get(i), expectedStockList.get(i).getAmount());
+			account.addStocks(expectedStockList.get(i));
 		}
 		// when
 		for(int i = 0; i < expectedStockList.size(); i++){
-			account.removeStocks(expectedStockList.get(i), expectedStockList.get(i).getAmount());
+			account.removeStocks(expectedStockList.get(i));
 		}
-		Map<String, Double> stocks = account.getStockList();
+		Map<String, Double> stocks = account.getStocks();
 		// then
 		assertEquals(0, stocks.get("KGHM").doubleValue(),0);
 		assertEquals(0, stocks.get("PKOBP").doubleValue(),0);
