@@ -36,4 +36,8 @@ public class BrokersOfficeManager {
 	public Map<String, Double> checkUserStocks(){
 		return account.getStocks();
 	}
+	
+	public double checkBalanceInGivenCurrency(String currency){
+		return account.getBalanceInGivenCurrency(currency);
+	}
 }

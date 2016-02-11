@@ -53,6 +53,10 @@ public class Account {
 		return accountMoney;
 	}
 	
+	public double getBalanceInGivenCurrency(String currency){
+		return accountMoney.get(currency);
+	}
+	
 	public void addStocks(StockTo stockTo){
 		String companyName = stockTo.getStock().getCompanyName();
 		stocks.put(companyName, stocks.get(companyName) + stockTo.getAmount());

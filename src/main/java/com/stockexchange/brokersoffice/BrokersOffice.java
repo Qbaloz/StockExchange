@@ -41,5 +41,9 @@ public class BrokersOffice {
 		return brokersOfficeManager.checkUserStocks();
 	}
 	
+	public double checkBalanceInGivenCurrency(String currency){
+		return brokersOfficeManager.checkBalanceInGivenCurrency(currency);
+	}
+	
 	
 }
