@@ -74,4 +74,26 @@ public class Simulation {
 		userStocks.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue)).forEach(System.out::println);
 	}
 	
+	public void printAccountValue(){
+		double stockValue = 0;
+		double amountOfStocks = 0;
+		String companyName = null;
+		
+		for (String key : userStocks.keySet()) {
+			if(userStocks.get(key) > 0){
+				amountOfStocks = userStocks.get(key);
+				companyName = key;
+			}
+		}
+		
+		for(int i = 0; i < stocks.size(); i ++){
+			if(stocks.get(i).getCompanyName().equals(companyName)){
+				stockValue = stocks.get(i).getStockValue();
+			}
+		}
+
+		double accountValue = balance + (stockValue*amountOfStocks);
+		System.out.println("Account Value:" + accountValue);
+	}
+	
 }

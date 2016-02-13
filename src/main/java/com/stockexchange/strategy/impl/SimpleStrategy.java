@@ -16,22 +16,22 @@ public class SimpleStrategy implements Strategy{
 
 	private Stock stock;
 	private double spentMoney;
+	List<StockTo> stocksToBuy = new ArrayList<StockTo>();
+	List<StockTo> stocksToSell = new ArrayList<StockTo>();
 	
 	@Override
 	public List<StockTo> calculateWhatUserShouldBuy(List<Stock> stocks, Map<String, Double> userStocks, double availableMoney) {
-		List<StockTo> stocksToBuy = new ArrayList<StockTo>();
-		
-		stock = findCheapestStocks(stocks);
-		double amount = Math.floor((availableMoney/stock.getStockValue()) * 0.9);
-		spentMoney = amount * stock.getStockValue();
-		stocksToBuy.add(new StockTo(stock, amount));
-		
+		if(!(userStocks == null)){
+			stock = findCheapestStocks(stocks);
+			double amount = Math.floor((availableMoney/stock.getStockValue()) * 0.9);
+			spentMoney = amount * stock.getStockValue();
+			stocksToBuy.add(new StockTo(stock, amount));
+		}
 		return stocksToBuy;
 	}
 
 	@Override
 	public List<StockTo> calculateWhatUserShouldSell(List<Stock> stocks, Map<String, Double> userStocks) {
-		List<StockTo> stocksToSell = new ArrayList<StockTo>();
 		String companyName;
 		double stockAmount;
 		double actualStockValue = 0;

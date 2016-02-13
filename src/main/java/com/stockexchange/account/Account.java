@@ -15,28 +15,14 @@ public class Account {
 
 	private Map<String, Double> accountMoney = new HashMap<String, Double>();
 	private Map<String, Double> stocks = new HashMap<String, Double>();
-	private double startingMoneyInPLN = 10000;
-	private double startingMoneyInEUR = 0;
-	private double newAccountNumberOfStocks = 0;
 	
 	public Account(){
-		accountMoney.put("PLN", startingMoneyInPLN);
-		accountMoney.put("EUR", startingMoneyInEUR);
-		initializeNewAccountStocks();
-	}
-	
-	public Account(double PLN, double EUR){
-		accountMoney.put("PLN", PLN);
-		accountMoney.put("EUR", EUR);
-		initializeNewAccountStocks();
-	}
-	
-	private void initializeNewAccountStocks(){
-		stocks.put("PKOBP", newAccountNumberOfStocks);
-		stocks.put("KGHM", newAccountNumberOfStocks);
-		stocks.put("PGNIG", newAccountNumberOfStocks);
-		stocks.put("JSW", newAccountNumberOfStocks);
-		stocks.put("TPSA", newAccountNumberOfStocks);
+		for (AccountCurrencies currencies : AccountCurrencies.values()) {
+			accountMoney.put(currencies.asString(), currencies.asDouble());
+		}
+		for (AccountStocks companies : AccountStocks.values()) {
+			stocks.put(companies.asString(), companies.asDouble());
+		}
 	}
 	
 	public void depositMoney(Money money){

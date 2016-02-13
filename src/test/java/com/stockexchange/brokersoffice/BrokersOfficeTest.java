@@ -90,7 +90,7 @@ public class BrokersOfficeTest {
 	public void testShouldBuyStocksUsingPLNCurrency(){
 		// given
 		StockTo stockTo = new StockTo(new Stock("PKOBP",10),50);
-		double expectedBalance = 9500;
+		double expectedBalance = 9475;
 		double expectedStocksAmount = 50;
 		String currencyToUse = "PLN";
 		// when
@@ -106,7 +106,7 @@ public class BrokersOfficeTest {
 	public void testShouldSellStocksUsingPLNCurrency(){
 		// given
 		StockTo stockTo = new StockTo(new Stock("PKOBP",10),50);
-		double expectedBalance = 10000;
+		double expectedBalance = 9950;
 		double expectedStocksAmount = 0;
 		String currencyToUse = "PLN";
 		// when

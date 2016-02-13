@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -21,7 +21,7 @@ import com.stockexchange.repository.StockMarketDataRepository;
 @Repository
 public class StockMarketDataRepositoryImpl implements StockMarketDataRepository{
 
-	private Map<Date, List<Stock>> stockMap = new LinkedHashMap<Date, List<Stock>>();
+	private Map<Date, List<Stock>> stockMap = new HashMap<Date, List<Stock>>();
 	Date date = new Date();
 	DateFormat format = new SimpleDateFormat("yyyymmdd", Locale.ENGLISH);
 	

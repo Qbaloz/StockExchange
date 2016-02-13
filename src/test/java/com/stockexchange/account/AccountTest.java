@@ -33,7 +33,7 @@ public class AccountTest {
 	@Test
 	public void testShouldDepositMoneyInPLN(){
 		//given
-		account = new Account(10000,0);
+		account = new Account();
 		Money money = new Money("PLN", 5000);
 		double expectedBalance = 15000;
 		//when
@@ -46,7 +46,7 @@ public class AccountTest {
 	@Test
 	public void testShouldDepositMoneyInEUR(){
 		//given
-		account = new Account(10000,0);
+		account = new Account();
 		Money money = new Money("EUR", 5000);
 		double expectedBalance = 5000;
 		//when
@@ -59,7 +59,7 @@ public class AccountTest {
 	@Test
 	public void testShouldWithdrawMoneyInPLN(){
 		//given
-		account = new Account(10000,0);
+		account = new Account();
 		Money money = new Money("PLN", 5000);
 		double expectedBalance = 5000;
 		//when
@@ -72,9 +72,9 @@ public class AccountTest {
 	@Test
 	public void testShouldWithdrawMoneyInEUR(){
 		//given
-		account = new Account(10000,5000);
+		account = new Account();
 		Money money = new Money("EUR", 5000);
-		double expectedBalance = 0;
+		double expectedBalance = -5000;
 		//when
 		account.withdrawMoney(money);
 		Map<String, Double> balance = account.getBalance();
@@ -85,7 +85,7 @@ public class AccountTest {
 	@Test
 	public void testShouldCheckAccountBalanceInPLN() {
 		// given
-		account = new Account(10000,5000);
+		account = new Account();
 		Map<String, Double> expectedBalance = new HashMap<String, Double>();
 		expectedBalance.put("PLN", (double) 10000);
 		expectedBalance.put("EUR", (double) 0);
@@ -102,11 +102,11 @@ public class AccountTest {
 	@Test
 	public void testShouldCheckAccountBalanceInEUR() {
 		// given
-		account = new Account(10000,5000);
+		account = new Account();
 		Map<String, Double> expectedBalance = new HashMap<String, Double>();
 		expectedBalance.put("PLN", (double) 10000);
-		expectedBalance.put("EUR", (double) 5000);
-		double expectedAmount = 5000;
+		expectedBalance.put("EUR", (double) 0);
+		double expectedAmount = 0;
 		// when
 		Map<String, Double> balance = account.getBalance();
 		double amount = balance.get("EUR");
@@ -122,7 +122,7 @@ public class AccountTest {
 		List<StockTo> expectedStockList = new ArrayList<StockTo>();
 		expectedStockList.add(new StockTo(new Stock("KGHM",20), 100));
 		expectedStockList.add(new StockTo(new Stock("PKOBP",20), 20));
-		account = new Account(10000,5000);
+		account = new Account();
 		// when
 		for(int i = 0; i < expectedStockList.size(); i++){
 			account.addStocks(expectedStockList.get(i));
@@ -139,7 +139,7 @@ public class AccountTest {
 		List<StockTo> expectedStockList = new ArrayList<StockTo>();
 		expectedStockList.add(new StockTo(new Stock("KGHM",20), 100));
 		expectedStockList.add(new StockTo(new Stock("PKOBP",20), 20));
-		account = new Account(10000,5000);
+		account = new Account();
 		for(int i = 0; i < expectedStockList.size(); i++){
 			account.addStocks(expectedStockList.get(i));
 		}

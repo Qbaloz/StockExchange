@@ -23,6 +23,7 @@ public class SimulationTest {
 		simulation.runSimulation(strategyName);
 		simulation.printBalance();
 		simulation.printUserStocks();
+		simulation.printAccountValue();
 		// then
 	}
 

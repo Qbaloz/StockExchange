@@ -17,14 +17,18 @@ public class BrokersOfficeManager {
 	@Autowired
 	private Account account;
 	
+	final static double PERCENTAGE = 0.05;
+	
 	public void performBuyOperation(String currency, StockTo stockTo){
 		double stocksWorth = stockTo.getStock().getStockValue() * stockTo.getAmount();
+		stocksWorth = stocksWorth + stocksWorth * PERCENTAGE;
 		account.withdrawMoney(new Money(currency, stocksWorth));
 		account.addStocks(stockTo);
 	}
 	
 	public void performSellOperation(String currency, StockTo stockTo){
 		double stocksWorth = stockTo.getStock().getStockValue() * stockTo.getAmount();
+		stocksWorth = stocksWorth - stocksWorth * PERCENTAGE;
 		account.depositMoney(new Money(currency, stocksWorth));
 		account.removeStocks(stockTo);
 	}

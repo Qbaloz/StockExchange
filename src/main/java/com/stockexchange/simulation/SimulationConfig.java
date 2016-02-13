@@ -14,7 +14,7 @@ public class SimulationConfig {
 
 	private final String firstSimulationDay = "20130102";
 	private final String lastSimulationDay = "20131230";
-	private boolean runSimulation = true;
+	private boolean isSimulationRunning = true;
 	
 	Date actualDay = new Date();
 	Date lastDay = new Date();
@@ -40,9 +40,9 @@ public class SimulationConfig {
 	public boolean isNextDay(){
 		actualDay = getNextDay(actualDay);
 		if(actualDay.after(lastDay)){
-			runSimulation = false;
+			isSimulationRunning = false;
 		}
-		return runSimulation;
+		return isSimulationRunning;
 	}
 	
 }
