@@ -11,7 +11,7 @@ import com.stockexchange.strategy.Strategy;
 
 //Buy cheapest stocks for 90% of money and sell when price is 10% higher
 
-@Component
+@Component("SimpleStrategy")
 public class SimpleStrategy implements Strategy{
 
 	private Stock stock;
