@@ -10,7 +10,7 @@ import java.util.Locale;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimulationConfig {
+public class SimulationDateConfig {
 
 	private final String firstSimulationDay = "20130102";
 	private final String lastSimulationDay = "20131230";
@@ -20,7 +20,7 @@ public class SimulationConfig {
 	Date lastDay = new Date();
 	DateFormat format = new SimpleDateFormat("yyyymmdd", Locale.ENGLISH);
 	
-	public SimulationConfig() throws ParseException{
+	public SimulationDateConfig() throws ParseException{
 		actualDay = format.parse(firstSimulationDay);
 		lastDay = format.parse(lastSimulationDay);
 	}

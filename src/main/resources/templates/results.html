@@ -7,10 +7,12 @@
 </head>
 <body>
 	<h1>Hello to stock exchange simulator!</h1>
-	<h3>Simple strategy:</h3>
-
-	<form data-th-action="@{'/strategy/simpleStrategy'}" method="post">
-		<button class="button" type="submit">Run Simulation</button>
-	</form>
+	<h3>Simulation results:</h3>
+	<p th:inline="text">[['Money: ' + ${balance}]]</p>
+	<p th:each="userStocks: ${userStocks}">
+		<span
+			th:text="'Company Name: ' + ${userStocks.key} + ', Amount of stocks: ' + ${userStocks.value}"></span>
+	</p>
+	<p th:inline="text">[['Total account value: ' + ${accountValue}]]</p>
 </body>
 </html>

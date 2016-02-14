@@ -21,9 +21,6 @@ public class SimulationTest {
 		String strategyName = "SimpleStrategy";
 		// when
 		simulation.runSimulation(strategyName);
-		simulation.printBalance();
-		simulation.printUserStocks();
-		simulation.printAccountValue();
 		// then
 	}
 

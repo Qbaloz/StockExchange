@@ -1,6 +1,5 @@
 package com.stockexchange.simulation;
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class Simulation {
 	private BrokersOffice brokersOffice;
 	
 	@Autowired
-	private SimulationConfig simulationDate;
+	private SimulationDateConfig simulationDate;
 
 	private double balance;
 	private final String currency = "PLN";
@@ -66,15 +65,15 @@ public class Simulation {
 		
 	}
 	
-	public void printBalance(){
-		System.out.println("Balance:" + balance);
+	public double getBalance(){
+		return balance;
 	}
 	
-	public void printUserStocks(){
-		userStocks.entrySet().stream().sorted(Comparator.comparing(Map.Entry::getValue)).forEach(System.out::println);
+	public Map<String, Double> getUserStocks(){
+		return userStocks;
 	}
 	
-	public void printAccountValue(){
+	public double getAccountValue(){
 		double stockValue = 0;
 		double amountOfStocks = 0;
 		String companyName = null;
@@ -93,7 +92,7 @@ public class Simulation {
 		}
 
 		double accountValue = balance + (stockValue*amountOfStocks);
-		System.out.println("Account Value:" + accountValue);
+		return accountValue;
 	}
 	
 }
